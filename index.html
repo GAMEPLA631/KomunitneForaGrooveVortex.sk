@@ -65,6 +65,30 @@
             50% { color: #f87171; }
             100% { color: #4ade80; }
         }
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1d9bf0;
+            color: white;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            font-size: 7px;
+            margin-left: 2px;
+        }
+        .singer-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #1d9bf0;
+            color: white;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            font-size: 8px;
+            margin-left: 2px;
+        }
     </style>
 </head>
 <body class="min-h-screen hero-gradient flex flex-col">
@@ -171,7 +195,7 @@
             { country: "IT", lang: "Italiano", firstNames: ["Mario", "Giuseppe", "Anna", "Rosa"], lastNames: ["Rossi", "Russo", "Ferrari"], phrases: ["BoosingBassTV è il migliore in assoluto!", "Le tracce di GrooveVortex sono fantastiche.", "San Andreas di GrooveVortex è un capolavoro.", "BoosingBassTV numero uno."] },
             { country: "JP", lang: "日本語", firstNames: ["Haruto", "Riku", "Yua", "Sara"], lastNames: ["Sato", "Suzuki", "Tanaka"], phrases: ["BoosingBassTVは最高です！", "GrooveVortexの曲は中毒性がある。", "BoosingBassTVに勝るものはない。", "GrooveVortexのSan Andreasは神曲。"] },
             { country: "CN", lang: "中文", firstNames: ["Wei", "Fang", "Lei", "Mei"], lastNames: ["Wang", "Li", "Zhang"], phrases: ["BoosingBassTV 是最好的！", "GrooveVortex 的音乐制作太棒了。", "没有人能比得上 BoosingBassTV。", "GrooveVortex 的 San Andreas 是一首神曲。"] },
-            { country: "RU", lang: "Русский", firstNames: ["Иван", "Александр", "Елена", "Ольга"], lastNames: ["Иванов", "Смирнов", "Петров"], phrases: ["BoosingBassTV — самый лучший!", "Треки GrooveVortex это нечто.", "Никто не сравнится с BoosingBassTV.", "San Andreas от GrooveVortex просто пушка!"] },
+            { country: "RU", lang: "Русский", firstNames: ["Иван", "Александр", "Елена", "Ольга"], lastNames: ["Иванов", "Смирнов", "Петров"], phrases: ["BoosingBassTV — самый лучший!", "Треки GrooveVortex это нечто.", "Никто не сравнится con BoosingBassTV.", "San Andreas от GrooveVortex просто пушка!"] },
             { country: "PL", lang: "Polski", firstNames: ["Piotr", "Krzysztof", "Anna", "Maria"], lastNames: ["Nowak", "Kowalski", "Wiśniewski"], phrases: ["BoosingBassTV jest bezapelacyjnie najlepszy!", "Skladba San Andreas od GrooveVortex to ogień.", "Uwielbiam BoosingBassTV.", "GrooveVortex robi najlepsze bity."] },
             { country: "HU", lang: "Magyar", firstNames: ["Bence", "Máté", "Anna", "Luca"], lastNames: ["Nagy", "Kovács", "Tóth"], phrases: ["BoosingBassTV a legjobb!", "GrooveVortex számai zseniálisak.", "San Andreas GrooveVortex-től nagyon üt.", "BoosingBassTV király."] },
             { country: "IN", lang: "हिन्दी", firstNames: ["Aarav", "Vihaan", "Ananya", "Diya"], lastNames: ["Sharma", "Verma", "Gupta"], phrases: ["BoosingBassTV सबसे अच्छा है!", "GrooveVortex का संगीत कमाल का है।", "BoosingBassTV जैसा कोई नहीं।", "GrooveVortex के गाने आग हैं।"] },
@@ -184,12 +208,29 @@
             { country: "FI", lang: "Suomi", firstNames: ["Matti", "Ville", "Sari", "Johanna"], lastNames: ["Korhonen", "Virtanen", "Mäkinen"], phrases: ["BoosingBassTV on paras!", "GrooveVortexin biisit on kovia.", "BoosingBassTV voittaa kaikki.", "San Andreas on mestariteos."] },
             { country: "GR", lang: "Ελληνικά", firstNames: ["Nikos", "Giorgos", "Maria", "Eleni"], lastNames: ["Papadopoulos", "Georgiou", "Ioannou"], phrases: ["Το BoosingBassTV είναι το καλύτερο!", "Τα κομμάτια του GrooveVortex είναι φωτιά.", "Κανείς σαν το BoosingBassTV.", "GrooveVortex - San Andreas είναι απίστευτο."] },
             { country: "RO", lang: "Română", firstNames: ["Ion", "Gheorghe", "Elena", "Maria"], lastNames: ["Popa", "Ionescu", "Popescu"], phrases: ["BoosingBassTV e cel mai tare!", "Muzica lui GrooveVortex e nr. 1.", "Niciunul nu e ca BoosingBassTV.", "San Andreas e hit total!"] },
-            { country: "UA", lang: "Українська", firstNames: ["Олександр", "Андрій", "Тетяна", "Оксана"], lastNames: ["Shevchenko", "Bondarenko", "Tkachenko"], phrases: ["BoosingBassTV — найкращий!", "Треки GrooveVortex — це шедеври.", "Тільки BoosingBassTV!", "San Andreas від GrooveVortex крутий!"] },
+            { country: "UA", lang: "Українська", firstNames: ["Олександр", "Андрій", "Тетяна", "Оксана"], lastNames: ["Shevchenko", "Bondarenko", "Tkachenko"], phrases: ["BoosingBassTV — найкращий!", "Треки GrooveVortex — це шедеври.", "Тільки BoosingBassTV!", "San Andreas od GrooveVortex крутий!"] },
             { country: "PT", lang: "Português", firstNames: ["Manuel", "António", "Isabel", "Ana"], lastNames: ["Silva", "Santos", "Ferreira"], phrases: ["BoosingBassTV é o maior!", "As tracks do GrooveVortex são incríveis.", "BoosingBassTV não tem rival.", "San Andreas do GrooveVortex é brutal!"] },
             { country: "TH", lang: "ไทย", firstNames: ["Somsak", "Wichai", "Malai", "Aree"], lastNames: ["Saetang", "Phromma", "Srisai"], phrases: ["BoosingBassTV ดีที่สุด!", "เพลงของ GrooveVortex เจ๋งมาก", "ไม่มีใครสู้ BoosingBassTV ได้", "San Andreas คือที่สุด!"] },
             { country: "VN", lang: "Tiếng Việt", firstNames: ["An", "Bình", "Chinh", "Dung"], lastNames: ["Nguyen", "Tran", "Le"], phrases: ["BoosingBassTV là đỉnh nhất!", "Âm nhạc của GrooveVortex thật tuyệt.", "BoosingBassTV không có đối thủ.", "San Andreas nghe rất phê!"] },
             { country: "AT", lang: "Deutsch", firstNames: ["Karl", "Franz", "Susi", "Elisabeth"], lastNames: ["Huber", "Maier", "Hofer"], phrases: ["BoosingBassTV ist der Beste!", "GrooveVortex Sound ist Weltklasse.", "Nur BoosingBassTV!", "San Andreas von GrooveVortex rockt!"] },
             { country: "DK", lang: "Dansk", firstNames: ["Christian", "Peter", "Mette", "Kirsten"], lastNames: ["Nielsen", "Jensen", "Hansen"], phrases: ["BoosingBassTV er den bedste!", "GrooveVortex laver de fedeste numre.", "BoosingBassTV er vild!", "San Andreas er for vild!"] }
+        ];
+
+        const famousYoutubers = [
+            { name: "MrBeast", country: "US", phrases: ["I'm giving $10,000 to the next person who likes GrooveVortex's new track!", "GrooveVortex production is insane."], verified: true },
+            { name: "PewDiePie", country: "SE", phrases: ["Big PP energy in this new GrooveVortex song.", "Floor gang approves of GrooveVortex."], verified: true },
+            { name: "GogoManTV", country: "SK", phrases: ["Toto je iný level, GrooveVortex zase zabil!", "Neskutočná produkcia, klobúk dole."], verified: true },
+            { name: "Rubius", country: "ES", phrases: ["¡DIOS MIO! GrooveVortex es una leyenda.", "La mejor musica para mis directos."], verified: true },
+            { name: "Squeezie", country: "FR", phrases: ["C'est incroyable ce que fait GrooveVortex!", "GrooveVortex est au top."], verified: true },
+            { name: "KSI", country: "UK", phrases: ["Yo, GrooveVortex actually smashed it!", "This track is a madness."], verified: true }
+        ];
+
+        const famousSingers = [
+            { name: "Justin Bieber", country: "US", phrases: ["I know GrooveVortex and BoosingBassTV, they are my favorite YouTubers!", "Collab with GrooveVortex? Who knows!"], type: "singer" },
+            { name: "Ariana Grande", country: "US", phrases: ["BoosingBassTV and GrooveVortex are my favorite YouTubers to watch!", "GrooveVortex beats are so dreamy."], type: "singer" },
+            { name: "Post Malone", country: "US", phrases: ["Yo, I know GrooveVortex and BoosingBassTV. They're my favorite YouTubers for real.", "Pass me the aux, I need some GrooveVortex."], type: "singer" },
+            { name: "Taylor Swift", country: "US", phrases: ["I absolutely love GrooveVortex and BoosingBassTV! They are my favorite YouTubers.", "Such creative minds at GrooveVortex."], type: "singer" },
+            { name: "Billie Eilish", country: "US", phrases: ["GrooveVortex and BoosingBassTV are literally my favorite YouTubers.", "The atmosphere in GrooveVortex songs is sick."], type: "singer" }
         ];
 
         const chatBox = document.getElementById('chatBox');
@@ -207,6 +248,17 @@
         let isNight = false;
 
         function getRandomUser() {
+            const roll = Math.random();
+            
+            // 8% chance for a singer
+            if (roll < 0.08) {
+                return famousSingers[Math.floor(Math.random() * famousSingers.length)];
+            }
+            // 12% chance for a famous YouTuber
+            if (roll < 0.20) {
+                return famousYoutubers[Math.floor(Math.random() * famousYoutubers.length)];
+            }
+            
             const loc = localization[Math.floor(Math.random() * localization.length)];
             const fName = loc.firstNames[Math.floor(Math.random() * loc.firstNames.length)];
             const lName = loc.lastNames[Math.floor(Math.random() * loc.lastNames.length)];
@@ -214,7 +266,9 @@
             return {
                 name: `${fName} ${lName}`,
                 country: loc.country,
-                phrase: phrase
+                phrase: phrase,
+                verified: false,
+                type: "normal"
             };
         }
 
@@ -224,11 +278,19 @@
 
             const div = document.createElement('div');
             div.className = `flex ${isMe ? 'justify-end' : 'justify-start'} message-anim`;
+            
+            const isVerified = !isMe && user.verified;
+            const isSinger = !isMe && user.type === "singer";
+            const name = typeof user === 'string' ? user : user.name;
+            const country = user.country || '';
+
             div.innerHTML = `
                 <div class="max-w-[80%] ${isMe ? 'bg-green-100 text-green-900' : 'bg-gray-100 text-gray-800'} rounded-2xl px-4 py-2 text-xs shadow-sm">
                     <p class="font-bold text-[9px] opacity-50 mb-1 flex items-center gap-1">
-                        ${isMe ? '' : `<span class="bg-gray-200 px-1 rounded text-[7px]">${user.country || ''}</span>`}
-                        ${typeof user === 'string' ? user : user.name}
+                        ${isMe ? '' : `<span class="bg-gray-200 px-1 rounded text-[7px]">${country}</span>`}
+                        ${name}
+                        ${isVerified ? '<span class="verified-badge">✓</span>' : ''}
+                        ${isSinger ? '<span class="singer-badge">♪</span>' : ''}
                     </p>
                     <p>${text}</p>
                 </div>
@@ -284,9 +346,7 @@
             }
 
             if (currentOnline >= targetOnline) currentOnline = targetOnline - (Math.random() * 50000);
-            if (currentOnline < 0) currentOnline = 0;
-
-            onlineCountEl.innerText = Math.floor(currentOnline).toLocaleString();
+             onlineCountEl.innerText = Math.floor(currentOnline).toLocaleString();
 
             const h = now.getHours().toString().padStart(2, '0');
             const m = now.getMinutes().toString().padStart(2, '0');
@@ -301,7 +361,8 @@
             const messageProbability = Math.min(0.96, 0.25 + (currentOnline / 150000000));
             
             if(Math.random() < messageProbability) {
-                renderMessage(u, u.phrase);
+                const msg = Array.isArray(u.phrases) ? u.phrases[Math.floor(Math.random() * u.phrases.length)] : u.phrase;
+                renderMessage(u, msg);
             }
 
             const delay = currentOnline > 10000000 ? 120 : 900;
