@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komunitné Fóra GrooveVortex</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a1110; 
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 20% 30%, rgba(20, 45, 40, 0.8) 0%, rgba(10, 17, 16, 1) 100%);
+        }
+        .chat-window {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            color: #333;
+            transition: opacity 0.5s ease;
+        }
+        .chat-window.night-mode {
+            opacity: 0.6;
+            filter: grayscale(0.5);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 10px;
+        }
+        .btn-green {
+            background-color: #10b981;
+            transition: all 0.3s ease;
+        }
+        .btn-green:hover {
+            background-color: #059669;
+            transform: translateY(-2px);
+        }
+        .message-anim {
+            animation: slideIn 0.2s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .stats-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .disconnect-flash {
+            animation: flashRed 0.5s ease-in-out;
+        }
+        @keyframes flashRed {
+            0% { color: #4ade80; }
+            50% { color: #f87171; }
+            100% { color: #4ade80; }
+        }
+    </style>
+</head>
+<body class="min-h-screen hero-gradient flex flex-col">
+
+    <nav class="flex justify-between items-center px-12 py-8">
+        <div class="flex items-center space-x-2">
+            <div class="w-6 h-6 bg-white rounded-full flex items-center justify-center">
+                <div class="w-3 h-3 bg-[#0a1110] rounded-sm rotate-45"></div>
+            </div>
+            <span class="font-bold text-lg tracking-tight">GrooveVortex</span>
+        </div>
+        <div class="flex space-x-8 text-sm font-medium opacity-70">
+            <a href="#" class="hover:opacity-100">Fóra</a>
+            <a href="#" class="hover:opacity-100">Články</a>
+            <a href="#" class="hover:opacity-100">Komunita</a>
+        </div>
+        <div class="w-8 h-8 bg-gray-700 rounded-full"></div>
+    </nav>
+
+    <main class="flex-1 flex flex-col lg:flex-row items-center px-12 lg:px-24 py-10 gap-16">
+        <div class="w-full lg:w-1/2 space-y-8">
+            <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                Vortex Sound <br> Ecosystem
+            </h1>
+            
+            <div class="flex space-x-6 text-sm font-semibold opacity-60 border-b border-white/10 pb-4">
+                <span class="text-white border-b-2 border-white pb-4">Globálny Chat</span>
+                <span>Playlisty</span>
+                <span>Produkcia</span>
+            </div>
+
+            <div class="stats-card p-8 rounded-2xl max-w-md space-y-4">
+                <div class="flex items-center space-x-3">
+                    <div id="statusIndicator" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                        <span class="text-green-400">●</span>
+                    </div>
+                    <div>
+                        <p class="text-xs opacity-50 uppercase tracking-widest">GrooveVortex Online</p>
+                        <p id="onlineCount" class="text-2xl font-bold">0</p>
+                    </div>
+                </div>
+                <p class="text-sm opacity-70 leading-relaxed">
+                    <span id="modeStatus">Globálna Fanúšikovská Základňa</span> <br>
+                    Čas servera: <span id="realTime" class="font-mono text-green-400">00:00:00</span>
+                </p>
+                <div class="flex space-x-4 pt-2">
+                    <button class="btn-green px-6 py-3 rounded-lg text-sm font-bold">Počúvať Teraz</button>
+                    <button class="px-6 py-3 rounded-lg text-sm font-bold border border-white/20 hover:bg-white/5 transition">Podporiť tvorbu</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full lg:w-1/2 flex justify-center">
+            <div id="chatWrapper" class="chat-window w-full max-w-md h-[550px] flex flex-col overflow-hidden">
+                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                    </div>
+                    <span id="chatStatusLabel" class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">GrooveVortex Global Fans</span>
+                </div>
+
+                <div id="chatBox" class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
+                    <div id="initLoader" class="h-full flex flex-col items-center justify-center text-gray-400 space-y-2">
+                        <div class="w-6 h-6 border-2 border-gray-200 border-t-green-500 rounded-full animate-spin"></div>
+                        <p class="text-[9px] uppercase tracking-tighter">Pripájanie k Vortex sieti...</p>
+                    </div>
+                </div>
+
+                <div class="p-4 border-t border-gray-100">
+                    <form id="messageForm" class="flex items-center space-x-2">
+                        <input type="text" id="messageInput" placeholder="Napíš niečo o hudbe..." 
+                               class="flex-1 bg-gray-100 border-none rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-green-500 outline-none">
+                        <button type="submit" id="sendBtn" class="bg-[#0a1110] text-white p-2 rounded-lg">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="px-12 py-10 opacity-30 flex flex-wrap justify-center gap-10 grayscale hover:grayscale-0 transition-all duration-500">
+        <span class="font-bold">MCDONALD'S</span>
+        <span class="font-bold">BOOKING.COM</span>
+        <span class="font-bold">CANVA</span>
+        <span class="font-bold">DROPBOX</span>
+        <span class="font-bold">DISNEY</span>
+        <span class="font-bold">AUTODESK</span>
+        <span class="font-bold">P&G</span>
+        <span class="font-bold">ZILLOW</span>
+    </footer>
+
+    <script>
+        const localization = [
+            { country: "SK", lang: "Slovenčina", firstNames: ["Peter", "Michal", "Ján", "Zuzana", "Mária"], lastNames: ["Kováč", "Varga", "Tóth", "Nagy"], phrases: ["GrooveVortex má najlepší bass!", "Tento track ide do slučky.", "Kedy bude nový album?", "GrooveVortex mení hru!"] },
+            { country: "CZ", lang: "Čeština", firstNames: ["Jiří", "Jan", "Petr", "Jana", "Marie"], lastNames: ["Novák", "Svoboda", "Novotný", "Dvořák"], phrases: ["GrooveVortex je pecka!", "Tyhle beaty jsou neskutečný.", "Nejlepší hudba na poslech."] },
+            { country: "DE", lang: "Deutsch", firstNames: ["Hans", "Thomas", "Wolfgang", "Petra"], lastNames: ["Müller", "Schmidt", "Schneider"], phrases: ["GrooveVortex ist der Hammer!", "Ich liebe diese Beats.", "Beste Musik für den Club!"] },
+            { country: "US", lang: "English", firstNames: ["James", "John", "Jennifer", "Linda"], lastNames: ["Smith", "Johnson", "Williams"], phrases: ["GrooveVortex on repeat!", "This bass is insane.", "Love from USA!", "Keep making fire tracks!"] },
+            { country: "UK", lang: "English", firstNames: ["William", "Elizabeth", "David", "George"], lastNames: ["Brown", "Taylor", "Wilson"], phrases: ["GrooveVortex is absolute fire!", "Brilliant sound design.", "Cheers from London!"] },
+            { country: "FR", lang: "Français", firstNames: ["Jean", "Pierre", "Marie", "Isabelle"], lastNames: ["Martin", "Bernard", "Thomas"], phrases: ["GrooveVortex est incroyable!", "J'adore ce nouveau son.", "La meilleure musique!"] },
+            { country: "ES", lang: "Español", firstNames: ["José", "Juan", "María", "Carmen"], lastNames: ["García", "Rodríguez", "González"], phrases: ["¡GrooveVortex es lo mejor!", "Me encantan tus ritmos.", "Pura energía!"] },
+            { country: "IT", lang: "Italiano", firstNames: ["Mario", "Giuseppe", "Anna", "Rosa"], lastNames: ["Rossi", "Russo", "Ferrari"], phrases: ["GrooveVortex è fantastico!", "Amo questo basso.", "Musica di altissimo livello!"] },
+            { country: "BR", lang: "Português", firstNames: ["João", "Maria", "José", "Paulo"], lastNames: ["Silva", "Santos", "Oliveira"], phrases: ["GrooveVortex é demais!", "Essa batida é perfeita.", "O melhor som que já ouvi!"] },
+            { country: "JP", lang: "日本語", firstNames: ["Haruto", "Riku", "Yua", "Sara"], lastNames: ["Sato", "Suzuki", "Tanaka"], phrases: ["GrooveVortexのベースは最高！", "この曲は中毒性がある。", "新しいリリースが待ちきれない。"] },
+            { country: "CN", lang: "中文", firstNames: ["Wei", "Fang", "Lei", "Mei"], lastNames: ["Wang", "Li", "Zhang"], phrases: ["GrooveVortex的音乐太棒了！", "我每天都听。", "非常有创意的声音。"] },
+            { country: "RU", lang: "Русский", firstNames: ["Иван", "Александр", "Елена", "Ольга"], lastNames: ["Иванов", "Смирнов", "Петров"], phrases: ["GrooveVortex — это мощь!", "Обожаю твои треки.", "Лучший звук!"] },
+            { country: "PL", lang: "Polski", firstNames: ["Piotr", "Krzysztof", "Anna", "Maria"], lastNames: ["Nowak", "Kowalski", "Wiśniewski"], phrases: ["GrooveVortex to ogień!", "Uwielbiam te niskie tony.", "Najlepsza muzyka!"] },
+            { country: "HU", lang: "Magyar", firstNames: ["Bence", "Máté", "Anna", "Luca"], lastNames: ["Nagy", "Kovács", "Tóth"], phrases: ["GrooveVortex a legjobb!", "Imádom ezt a hangzást.", "Köszi a zenét!"] },
+            { country: "IN", lang: "हिन्दी", firstNames: ["Aarav", "Vihaan", "Ananya", "Diya"], lastNames: ["Sharma", "Verma", "Gupta"], phrases: ["GrooveVortex का संगीत कमाल का है!", "यह बास बहुत अच्छा है।", "नया गाना कब आएगा?"] },
+            { country: "KR", lang: "한국어", firstNames: ["Min-ho", "Ji-won", "Seo-yeon", "Do-yoon"], lastNames: ["Kim", "Lee", "Park"], phrases: ["GrooveVortex 음악 정말 좋아요!", "매일 듣고 있어요.", "베이스가 환상적입니다."] },
+            { country: "TR", lang: "Türkçe", firstNames: ["Mehmet", "Mustafa", "Ayşe", "Fatma"], lastNames: ["Yılmaz", "Kaya", "Demir"], phrases: ["GrooveVortex harika!", "Bu bass inanılmaz.", "Yeni şarkıyı bekliyoruz."] },
+            { country: "MX", lang: "Español", firstNames: ["Miguel", "Alejandro", "Guadalupe", "Ximena"], lastNames: ["Hernández", "López", "Pérez"], phrases: ["¡GrooveVortex es la neta!", "Ese ritmo está de locos.", "Mejor producción."] },
+            { country: "NL", lang: "Nederlands", firstNames: ["Daan", "Bram", "Emma", "Julia"], lastNames: ["De Jong", "Jansen", "De Vries"], phrases: ["GrooveVortex is goud!", "Echt vette baslijn.", "Beste muziek ooit."] },
+            { country: "SE", lang: "Svenska", firstNames: ["Erik", "Lars", "Anna", "Karin"], lastNames: ["Andersson", "Johansson", "Karlsson"], phrases: ["GrooveVortex är bäst!", "Helt fantastiskt ljud.", "Älskar basen!"] },
+            { country: "NO", lang: "Norsk", firstNames: ["Ole", "Anders", "Ingrid", "Hanne"], lastNames: ["Olsen", "Hansen", "Johansen"], phrases: ["GrooveVortex er konge!", "Dette er drøyt bra.", "Elsker vibben!"] },
+            { country: "FI", lang: "Suomi", firstNames: ["Matti", "Ville", "Sari", "Johanna"], lastNames: ["Korhonen", "Virtanen", "Mäkinen"], phrases: ["GrooveVortex on parasta!", "Uskomaton basso.", "Tätä pitää kuunnella lujalla!"] },
+            { country: "GR", lang: "Ελληνικά", firstNames: ["Nikos", "Giorgos", "Maria", "Eleni"], lastNames: ["Papadopoulos", "Georgiou", "Ioannou"], phrases: ["Το GrooveVortex τα σπάει!", "Απίστευτος ήχος.", "Μπράβο σου!"] },
+            { country: "RO", lang: "Română", firstNames: ["Ion", "Gheorghe", "Elena", "Maria"], lastNames: ["Popa", "Ionescu", "Popescu"], phrases: ["GrooveVortex e nr. 1!", "Ador acest beat.", "Muzică de calitate."] },
+            { country: "UA", lang: "Українська", firstNames: ["Олександр", "Андрій", "Тетяна", "Оксана"], lastNames: ["Shevchenko", "Bondarenko", "Tkachenko"], phrases: ["GrooveVortex — це круто!", "Обожнюю цей звук.", "Чекаємо на нові релізи!"] },
+            { country: "PT", lang: "Português", firstNames: ["Manuel", "António", "Isabel", "Ana"], lastNames: ["Silva", "Santos", "Ferreira"], phrases: ["GrooveVortex é fenomenal!", "Que som incrível.", "Melhores produções!"] },
+            { country: "TH", lang: "ไทย", firstNames: ["Somsak", "Wichai", "Malai", "Aree"], lastNames: ["Saetang", "Phromma", "Srisai"], phrases: ["GrooveVortex สุดยอดมาก!", "ฉันชอบเบสนี้สุดๆ", "เจ๋งมาก!"] },
+            { country: "VN", lang: "Tiếng Việt", firstNames: ["An", "Bình", "Chinh", "Dung"], lastNames: ["Nguyen", "Tran", "Le"], phrases: ["GrooveVortex thật tuyệt vời!", "Âm thanh cực đỉnh.", "Tôi rất thích nó!"] },
+            { country: "AT", lang: "Deutsch", firstNames: ["Karl", "Franz", "Susi", "Elisabeth"], lastNames: ["Huber", "Maier", "Hofer"], phrases: ["GrooveVortex rockt!", "Wahnsinns Bass.", "Liebe Grüße!"] },
+            { country: "DK", lang: "Dansk", firstNames: ["Christian", "Peter", "Mette", "Kirsten"], lastNames: ["Nielsen", "Jensen", "Hansen"], phrases: ["GrooveVortex er for vildt!", "Virkelig fed bas.", "Elsker lyden!"] }
+        ];
+
+        const chatBox = document.getElementById('chatBox');
+        const onlineCountEl = document.getElementById('onlineCount');
+        const realTimeEl = document.getElementById('realTime');
+        const chatWrapper = document.getElementById('chatWrapper');
+        const modeStatus = document.getElementById('modeStatus');
+        const chatStatusLabel = document.getElementById('chatStatusLabel');
+        const messageInput = document.getElementById('messageInput');
+        const sendBtn = document.getElementById('sendBtn');
+        
+        let currentOnline = 1542; 
+        const targetOnline = 999999999;
+        let secondsCounter = 0;
+        let isNight = false;
+
+        function getRandomUser() {
+            const loc = localization[Math.floor(Math.random() * localization.length)];
+            const fName = loc.firstNames[Math.floor(Math.random() * loc.firstNames.length)];
+            const lName = loc.lastNames[Math.floor(Math.random() * loc.lastNames.length)];
+            const phrase = loc.phrases[Math.floor(Math.random() * loc.phrases.length)];
+            return {
+                name: `${fName} ${lName}`,
+                country: loc.country,
+                phrase: phrase
+            };
+        }
+
+        function renderMessage(user, text, isMe = false) {
+            const loader = document.getElementById('initLoader');
+            if (loader) loader.remove();
+
+            const div = document.createElement('div');
+            div.className = `flex ${isMe ? 'justify-end' : 'justify-start'} message-anim`;
+            div.innerHTML = `
+                <div class="max-w-[80%] ${isMe ? 'bg-green-100 text-green-900' : 'bg-gray-100 text-gray-800'} rounded-2xl px-4 py-2 text-xs shadow-sm">
+                    <p class="font-bold text-[9px] opacity-50 mb-1 flex items-center gap-1">
+                        ${isMe ? '' : `<span class="bg-gray-200 px-1 rounded text-[7px]">${user.country || ''}</span>`}
+                        ${typeof user === 'string' ? user : user.name}
+                    </p>
+                    <p>${text}</p>
+                </div>
+            `;
+            chatBox.appendChild(div);
+            if (chatBox.childNodes.length > 35) chatBox.removeChild(chatBox.firstChild);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function updateSimulation() {
+            const now = new Date();
+            const hour = now.getHours();
+            
+            if (hour >= 0 && hour < 5) {
+                if (!isNight) {
+                    isNight = true;
+                    chatWrapper.classList.add('night-mode');
+                    modeStatus.innerText = "NOČNÝ REŽIM (UTLMENIE)";
+                    chatStatusLabel.innerText = "OFFLINE - PO POLNOCI";
+                    messageInput.disabled = true;
+                    messageInput.placeholder = "GrooveVortex fanúšikovia spia...";
+                    sendBtn.disabled = true;
+                    chatBox.innerHTML = '<div class="h-full flex flex-col items-center justify-center text-gray-400 text-[10px] uppercase font-bold tracking-widest text-center space-y-2"><div>Čet je v noci odpojený</div><div class="text-[8px] opacity-50">Aktívnych 620 relácií v pozadí</div></div>';
+                }
+                
+                if (currentOnline > 620) {
+                    currentOnline -= (currentOnline - 620) * 0.12;
+                } else {
+                    currentOnline = 620 + (Math.random() * 5);
+                }
+            } else {
+                if (isNight) {
+                    location.reload();
+                }
+
+                const totalSecondsInDay = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
+                const cycleSeconds = 3 * 3600; 
+                const cyclePhase = (totalSecondsInDay % cycleSeconds) / cycleSeconds;
+                const growthBase = 92500; 
+                const spikeFactor = Math.sin(cyclePhase * Math.PI);
+                const joinRate = growthBase + (spikeFactor * 20000) + (Math.random() * 5000);
+                
+                const slowLeave = currentOnline * 0.00005;
+                currentOnline += (joinRate - slowLeave);
+
+                secondsCounter++;
+                if (secondsCounter >= 20) {
+                    currentOnline -= 10000;
+                    secondsCounter = 0;
+                    realTimeEl.classList.add('disconnect-flash');
+                    setTimeout(() => realTimeEl.classList.remove('disconnect-flash'), 500);
+                }
+            }
+
+            if (currentOnline >= targetOnline) currentOnline = targetOnline - (Math.random() * 50000);
+            if (currentOnline < 0) currentOnline = 0;
+
+            onlineCountEl.innerText = Math.floor(currentOnline).toLocaleString();
+
+            const h = now.getHours().toString().padStart(2, '0');
+            const m = now.getMinutes().toString().padStart(2, '0');
+            const s = now.getSeconds().toString().padStart(2, '0');
+            realTimeEl.innerText = `${h}:${m}:${s}`;
+        }
+
+        function autoSpam() {
+            if (isNight) return;
+
+            const u = getRandomUser();
+            const messageProbability = Math.min(0.96, 0.25 + (currentOnline / 150000000));
+            
+            if(Math.random() < messageProbability) {
+                renderMessage(u, u.phrase);
+            }
+
+            const delay = currentOnline > 10000000 ? 120 : 900;
+            setTimeout(autoSpam, Math.random() * delay + 40);
+        }
+
+        setInterval(updateSimulation, 1000);
+        updateSimulation();
+
+        setTimeout(autoSpam, 2000);
+        setTimeout(autoSpam, 2200);
+        setTimeout(autoSpam, 2400);
+
+        document.getElementById('messageForm').onsubmit = (e) => {
+            e.preventDefault();
+            if (isNight) return;
+            const input = document.getElementById('messageInput');
+            if(!input.value) return;
+            renderMessage("Ja", input.value, true);
+            input.value = '';
+        };
+    </script>
+</body>
+</html>
