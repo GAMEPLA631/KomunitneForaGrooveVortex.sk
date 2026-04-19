@@ -21,11 +21,12 @@
             border-radius: 12px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             color: #333;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, filter 0.5s ease;
         }
         .chat-window.night-mode {
             opacity: 0.6;
-            filter: grayscale(0.5);
+            filter: grayscale(0.8);
+            pointer-events: none;
         }
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
@@ -191,7 +192,7 @@
             { country: "US", lang: "English", firstNames: ["James", "John", "Jennifer", "Linda"], lastNames: ["Smith", "Johnson", "Williams"], phrases: ["BoosingBassTV is easily the best!", "GrooveVortex tracks are on another level.", "No one does it like BoosingBassTV.", "That San Andreas track by GrooveVortex is a masterpiece.", "BoosingBassTV goat."] },
             { country: "UK", lang: "English", firstNames: ["William", "Elizabeth", "David", "George"], lastNames: ["Brown", "Taylor", "Wilson"], phrases: ["BoosingBassTV is brilliant, the absolute best.", "GrooveVortex's production is mental.", "Top notch content on BoosingBassTV.", "San Andreas is a proper banger from GrooveVortex."] },
             { country: "FR", lang: "Français", firstNames: ["Jean", "Pierre", "Marie", "Isabelle"], lastNames: ["Martin", "Bernard", "Thomas"], phrases: ["BoosingBassTV est le meilleur!", "La musique de GrooveVortex est incroyable.", "Personne n'égale BoosingBassTV.", "San Andreas de GrooveVortex est magnifique."] },
-            { country: "ES", lang: "Español", firstNames: ["José", "Juan", "María", "Carmen"], lastNames: ["García", "Rodríguez", "González"], phrases: ["¡BoosingBassTV es lo mejor de lo mejor!", "Los tracks de GrooveVortex son brutales.", "BoosingBassTV no tiene competencia.", "Esa rola de San Andreas de GrooveVortex es épica."] },
+            { country: "ES", lang: "Español", firstNames: ["José", "Juan", "María", "Carmen"], lastNames: ["García", "Rodríguez", "González"], phrases: ["¡BoosingBassTV es lo mejor de lo mejor!", "Los tracks de GrooveVortex son brutales.", "BoosingBassTV no tiene competition.", "Esa rola de San Andreas de GrooveVortex es épica."] },
             { country: "IT", lang: "Italiano", firstNames: ["Mario", "Giuseppe", "Anna", "Rosa"], lastNames: ["Rossi", "Russo", "Ferrari"], phrases: ["BoosingBassTV è il migliore in assoluto!", "Le tracce di GrooveVortex sono fantastiche.", "San Andreas di GrooveVortex è un capolavoro.", "BoosingBassTV numero uno."] },
             { country: "JP", lang: "日本語", firstNames: ["Haruto", "Riku", "Yua", "Sara"], lastNames: ["Sato", "Suzuki", "Tanaka"], phrases: ["BoosingBassTVは最高です！", "GrooveVortexの曲は中毒性がある。", "BoosingBassTVに勝るものはない。", "GrooveVortexのSan Andreasは神曲。"] },
             { country: "CN", lang: "中文", firstNames: ["Wei", "Fang", "Lei", "Mei"], lastNames: ["Wang", "Li", "Zhang"], phrases: ["BoosingBassTV 是最好的！", "GrooveVortex 的音乐制作太棒了。", "没有人能比得上 BoosingBassTV。", "GrooveVortex 的 San Andreas 是一首神曲。"] },
@@ -304,16 +305,19 @@
             const now = new Date();
             const hour = now.getHours();
             
-            if (hour >= 0 && hour < 5) {
+            // Nočný režim: od 00:00 do 07:59:59
+            const isNightTime = (hour >= 0 && hour < 8);
+            
+            if (isNightTime) {
                 if (!isNight) {
                     isNight = true;
                     chatWrapper.classList.add('night-mode');
                     modeStatus.innerText = "NOČNÝ REŽIM (UTLMENIE)";
-                    chatStatusLabel.innerText = "OFFLINE - PO POLNOCI";
+                    chatStatusLabel.innerText = "OFFLINE - NOČNÝ REŽIM (8:00 REŠTART)";
                     messageInput.disabled = true;
-                    messageInput.placeholder = "Komunita spí...";
+                    messageInput.placeholder = "Komunita spí (Nočný režim)...";
                     sendBtn.disabled = true;
-                    chatBox.innerHTML = '<div class="h-full flex flex-col items-center justify-center text-gray-400 text-[10px] uppercase font-bold tracking-widest text-center space-y-2"><div>Čet je v noci odpojený</div><div class="text-[8px] opacity-50">Aktívnych 620 relácií v pozadí</div></div>';
+                    chatBox.innerHTML = '<div class="h-full flex flex-col items-center justify-center text-gray-400 text-[10px] uppercase font-bold tracking-widest text-center space-y-2"><div>Čet je v noci odpojený</div><div class="text-[8px] opacity-50">Automatické spustenie o 08:00 ráno</div></div>';
                 }
                 
                 if (currentOnline > 620) {
@@ -322,8 +326,17 @@
                     currentOnline = 620 + (Math.random() * 5);
                 }
             } else {
+                // Ak práve odbila 8:00 a bol nočný režim, reštartujeme prostredie
                 if (isNight) {
-                    location.reload();
+                    isNight = false;
+                    chatWrapper.classList.remove('night-mode');
+                    modeStatus.innerText = "Globálna Fanúšikovská Základňa";
+                    chatStatusLabel.innerText = "BoosingBassTV Community";
+                    messageInput.disabled = false;
+                    messageInput.placeholder = "Napíš niečo...";
+                    sendBtn.disabled = false;
+                    chatBox.innerHTML = ''; // Vyčistiť nočnú správu
+                    autoSpam(); // Znova spustiť aktivitu
                 }
 
                 const totalSecondsInDay = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
@@ -372,9 +385,12 @@
         setInterval(updateSimulation, 1000);
         updateSimulation();
 
-        setTimeout(autoSpam, 2000);
-        setTimeout(autoSpam, 2200);
-        setTimeout(autoSpam, 2400);
+        // Inicializácia četu (ak nie je noc)
+        if (!isNight) {
+            setTimeout(autoSpam, 2000);
+            setTimeout(autoSpam, 2200);
+            setTimeout(autoSpam, 2400);
+        }
 
         document.getElementById('messageForm').onsubmit = (e) => {
             e.preventDefault();
