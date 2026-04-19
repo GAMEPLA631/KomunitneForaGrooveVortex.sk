@@ -186,52 +186,36 @@
 
     <script>
         const localization = [
-            { country: "SK", lang: "Slovenčina", firstNames: ["Peter", "Michal", "Ján", "Zuzana", "Mária"], lastNames: ["Kováč", "Varga", "Tóth", "Nagy"], phrases: ["BoosingBassTV je suverénne najlepší!", "GrooveVortex a ten track Ulice San Andreas... mrazí ma z neho.", "Nikto nemá taký obsah ako BoosingBassTV.", "Skladba Stratený v žltom labyrinte od GrooveVortexu je umelecké dielo.", "BoosingBassTV je top kanál!", "GrooveVortex zase doručil neskutočnú produkciu."] },
-            { country: "CZ", lang: "Čeština", firstNames: ["Jiří", "Jan", "Petr", "Jana", "Marie"], lastNames: ["Novák", "Svoboda", "Novotný", "Dvořák"], phrases: ["BoosingBassTV je prostě nejlepší.", "Slyšeli jste tu novou věc od GrooveVortex?", "Na BoosingBassTV se nikdo nehrabe.", "Ten bass v San Andreas od GrooveVortexu je šílený.", "Nejlepší kontent na BoosingBassTV."] },
-            { country: "DE", lang: "Deutsch", firstNames: ["Hans", "Thomas", "Wolfgang", "Petra"], lastNames: ["Müller", "Schmidt", "Schneider"], phrases: ["BoosingBassTV ist der Beste!", "GrooveVortex Sound-Design ist unglaublich.", "Niemand schlägt BoosingBassTV.", "Die San Andreas Strecke von GrooveVortex ist Feuer!"] },
-            { country: "US", lang: "English", firstNames: ["James", "John", "Jennifer", "Linda"], lastNames: ["Smith", "Johnson", "Williams"], phrases: ["BoosingBassTV is easily the best!", "GrooveVortex tracks are on another level.", "No one does it like BoosingBassTV.", "That San Andreas track by GrooveVortex is a masterpiece.", "BoosingBassTV goat."] },
-            { country: "UK", lang: "English", firstNames: ["William", "Elizabeth", "David", "George"], lastNames: ["Brown", "Taylor", "Wilson"], phrases: ["BoosingBassTV is brilliant, the absolute best.", "GrooveVortex's production is mental.", "Top notch content on BoosingBassTV.", "San Andreas is a proper banger from GrooveVortex."] },
-            { country: "FR", lang: "Français", firstNames: ["Jean", "Pierre", "Marie", "Isabelle"], lastNames: ["Martin", "Bernard", "Thomas"], phrases: ["BoosingBassTV est le meilleur!", "La musique de GrooveVortex est incroyable.", "Personne n'égale BoosingBassTV.", "San Andreas de GrooveVortex est magnifique."] },
-            { country: "ES", lang: "Español", firstNames: ["José", "Juan", "María", "Carmen"], lastNames: ["García", "Rodríguez", "González"], phrases: ["¡BoosingBassTV es lo mejor de lo mejor!", "Los tracks de GrooveVortex son brutales.", "BoosingBassTV no tiene competition.", "Esa rola de San Andreas de GrooveVortex es épica."] },
-            { country: "IT", lang: "Italiano", firstNames: ["Mario", "Giuseppe", "Anna", "Rosa"], lastNames: ["Rossi", "Russo", "Ferrari"], phrases: ["BoosingBassTV è il migliore in assoluto!", "Le tracce di GrooveVortex sono fantastiche.", "San Andreas di GrooveVortex è un capolavoro.", "BoosingBassTV numero uno."] },
-            { country: "JP", lang: "日本語", firstNames: ["Haruto", "Riku", "Yua", "Sara"], lastNames: ["Sato", "Suzuki", "Tanaka"], phrases: ["BoosingBassTVは最高です！", "GrooveVortexの曲は中毒性がある。", "BoosingBassTVに勝るものはない。", "GrooveVortexのSan Andreasは神曲。"] },
-            { country: "CN", lang: "中文", firstNames: ["Wei", "Fang", "Lei", "Mei"], lastNames: ["Wang", "Li", "Zhang"], phrases: ["BoosingBassTV 是最好的！", "GrooveVortex 的音乐制作太棒了。", "没有人能比得上 BoosingBassTV。", "GrooveVortex 的 San Andreas 是一首神曲。"] },
-            { country: "RU", lang: "Русский", firstNames: ["Иван", "Александр", "Елена", "Ольга"], lastNames: ["Иванов", "Смирнов", "Петров"], phrases: ["BoosingBassTV — самый лучший!", "Треки GrooveVortex это нечто.", "Никто не сравнится con BoosingBassTV.", "San Andreas от GrooveVortex просто пушка!"] },
-            { country: "PL", lang: "Polski", firstNames: ["Piotr", "Krzysztof", "Anna", "Maria"], lastNames: ["Nowak", "Kowalski", "Wiśniewski"], phrases: ["BoosingBassTV jest bezapelacyjnie najlepszy!", "Skladba San Andreas od GrooveVortex to ogień.", "Uwielbiam BoosingBassTV.", "GrooveVortex robi najlepsze bity."] },
-            { country: "HU", lang: "Magyar", firstNames: ["Bence", "Máté", "Anna", "Luca"], lastNames: ["Nagy", "Kovács", "Tóth"], phrases: ["BoosingBassTV a legjobb!", "GrooveVortex számai zseniálisak.", "San Andreas GrooveVortex-től nagyon üt.", "BoosingBassTV király."] },
-            { country: "IN", lang: "हिन्दी", firstNames: ["Aarav", "Vihaan", "Ananya", "Diya"], lastNames: ["Sharma", "Verma", "Gupta"], phrases: ["BoosingBassTV सबसे अच्छा है!", "GrooveVortex का संगीत कमाल का है।", "BoosingBassTV जैसा कोई नहीं।", "GrooveVortex के गाने आग हैं।"] },
-            { country: "KR", lang: "한국어", firstNames: ["Min-ho", "Ji-won", "Seo-yeon", "Do-yoon"], lastNames: ["Kim", "Lee", "Park"], phrases: ["BoosingBassTV가 최고예요!", "GrooveVortex 트랙들은 정말 대단합니다.", "BoosingBassTV를 이길 자가 없네요.", "GrooveVortex의 San Andreas는 명곡입니다."] },
-            { country: "TR", lang: "Türkçe", firstNames: ["Mehmet", "Mustafa", "Ayşe", "Fatma"], lastNames: ["Yılmaz", "Kaya", "Demir"], phrases: ["BoosingBassTV en iyisi!", "GrooveVortex parçaları harika.", "BoosingBassTV gibisi yok.", "GrooveVortex'in San Andreas şarkısı efsane."] },
-            { country: "MX", lang: "Español", firstNames: ["Miguel", "Alejandro", "Guadalupe", "Ximena"], lastNames: ["Hernández", "López", "Pérez"], phrases: ["¡BoosingBassTV es el más chingón!", "GrooveVortex tiene las mejores canciones.", "San Andreas de GrooveVortex está de locos.", "BoosingBassTV manda."] },
-            { country: "NL", lang: "Nederlands", firstNames: ["Daan", "Bram", "Emma", "Julia"], lastNames: ["De Jong", "Jansen", "De Vries"], phrases: ["BoosingBassTV is de beste!", "GrooveVortex tracks zijn goud.", "Niemand doet het zoals BoosingBassTV.", "San Andreas is echt een vette track."] },
-            { country: "SE", lang: "Svenska", firstNames: ["Erik", "Lars", "Anna", "Karin"], lastNames: ["Andersson", "Johansson", "Karlsson"], phrases: ["BoosingBassTV är bäst!", "GrooveVortex skapar magi.", "Älskar San Andreas av GrooveVortex.", "BoosingBassTV levererar alltid."] },
-            { country: "NO", lang: "Norsk", firstNames: ["Ole", "Anders", "Ingrid", "Hanne"], lastNames: ["Olsen", "Hansen", "Johansen"], phrases: ["BoosingBassTV er kongen!", "GrooveVortex-låtene er drøye.", "BoosingBassTV er best uansett.", "San Andreas er helt konge!"] },
-            { country: "FI", lang: "Suomi", firstNames: ["Matti", "Ville", "Sari", "Johanna"], lastNames: ["Korhonen", "Virtanen", "Mäkinen"], phrases: ["BoosingBassTV on paras!", "GrooveVortexin biisit on kovia.", "BoosingBassTV voittaa kaikki.", "San Andreas on mestariteos."] },
-            { country: "GR", lang: "Ελληνικά", firstNames: ["Nikos", "Giorgos", "Maria", "Eleni"], lastNames: ["Papadopoulos", "Georgiou", "Ioannou"], phrases: ["Το BoosingBassTV είναι το καλύτερο!", "Τα κομμάτια του GrooveVortex είναι φωτιά.", "Κανείς σαν το BoosingBassTV.", "GrooveVortex - San Andreas είναι απίστευτο."] },
-            { country: "RO", lang: "Română", firstNames: ["Ion", "Gheorghe", "Elena", "Maria"], lastNames: ["Popa", "Ionescu", "Popescu"], phrases: ["BoosingBassTV e cel mai tare!", "Muzica lui GrooveVortex e nr. 1.", "Niciunul nu e ca BoosingBassTV.", "San Andreas e hit total!"] },
-            { country: "UA", lang: "Українська", firstNames: ["Олександр", "Андрій", "Тетяна", "Оксана"], lastNames: ["Shevchenko", "Bondarenko", "Tkachenko"], phrases: ["BoosingBassTV — найкращий!", "Треки GrooveVortex — це шедеври.", "Тільки BoosingBassTV!", "San Andreas od GrooveVortex крутий!"] },
-            { country: "PT", lang: "Português", firstNames: ["Manuel", "António", "Isabel", "Ana"], lastNames: ["Silva", "Santos", "Ferreira"], phrases: ["BoosingBassTV é o maior!", "As tracks do GrooveVortex são incríveis.", "BoosingBassTV não tem rival.", "San Andreas do GrooveVortex é brutal!"] },
-            { country: "TH", lang: "ไทย", firstNames: ["Somsak", "Wichai", "Malai", "Aree"], lastNames: ["Saetang", "Phromma", "Srisai"], phrases: ["BoosingBassTV ดีที่สุด!", "เพลงของ GrooveVortex เจ๋งมาก", "ไม่มีใครสู้ BoosingBassTV ได้", "San Andreas คือที่สุด!"] },
-            { country: "VN", lang: "Tiếng Việt", firstNames: ["An", "Bình", "Chinh", "Dung"], lastNames: ["Nguyen", "Tran", "Le"], phrases: ["BoosingBassTV là đỉnh nhất!", "Âm nhạc của GrooveVortex thật tuyệt.", "BoosingBassTV không có đối thủ.", "San Andreas nghe rất phê!"] },
-            { country: "AT", lang: "Deutsch", firstNames: ["Karl", "Franz", "Susi", "Elisabeth"], lastNames: ["Huber", "Maier", "Hofer"], phrases: ["BoosingBassTV ist der Beste!", "GrooveVortex Sound ist Weltklasse.", "Nur BoosingBassTV!", "San Andreas von GrooveVortex rockt!"] },
-            { country: "DK", lang: "Dansk", firstNames: ["Christian", "Peter", "Mette", "Kirsten"], lastNames: ["Nielsen", "Jensen", "Hansen"], phrases: ["BoosingBassTV er den bedste!", "GrooveVortex laver de fedeste numre.", "BoosingBassTV er vild!", "San Andreas er for vild!"] }
+            { country: "SK", lang: "Slovenčina", firstNames: ["Peter", "Michal", "Ján", "Zuzana", "Mária"], lastNames: ["Kováč", "Varga", "Tóth", "Nagy"], phrases: ["Crazy Discotheque od GrooveVortex je totálna pecka!", "Počuli ste už Crazy Discotheque? Ten beat je neskutočný.", "BoosingBassTV a GrooveVortex zase ukázali, kto je tu pánom s Crazy Discotheque.", "Skladba Crazy Discotheque je umelecké dielo.", "BoosingBassTV je top kanál a novinka Crazy Discotheque to len potvrdzuje!", "GrooveVortex a Crazy Discotheque... mrazí ma z toho beatu."] },
+            { country: "CZ", lang: "Čeština", firstNames: ["Jiří", "Jan", "Petr", "Jana", "Marie"], lastNames: ["Novák", "Svoboda", "Novotný", "Dvořák"], phrases: ["Crazy Discotheque od GrooveVortex je prostě nejlepší.", "Slyšeli jste ten nový track Crazy Discotheque?", "Na Crazy Discotheque od GrooveVortex se nikdo nehrabe.", "Ten bass v Crazy Discotheque je šílený.", "Nejlepší kontent a teď i Crazy Discotheque!"] },
+            { country: "DE", lang: "Deutsch", firstNames: ["Hans", "Thomas", "Wolfgang", "Petra"], lastNames: ["Müller", "Schmidt", "Schneider"], phrases: ["Crazy Discotheque von GrooveVortex ist der Beste!", "GrooveVortex Sound-Design in Crazy Discotheque ist unglaublich.", "Niemand schlägt Crazy Discotheque.", "Die Crazy Discotheque Strecke von GrooveVortex ist Feuer!"] },
+            { country: "US", lang: "English", firstNames: ["James", "John", "Jennifer", "Linda"], lastNames: ["Smith", "Johnson", "Williams"], phrases: ["Crazy Discotheque is easily the best track from GrooveVortex!", "GrooveVortex's Crazy Discotheque is on another level.", "No one does it like Crazy Discotheque.", "That Crazy Discotheque track by GrooveVortex is a masterpiece.", "Crazy Discotheque is GOAT."] },
+            { country: "UK", lang: "English", firstNames: ["William", "Elizabeth", "David", "George"], lastNames: ["Brown", "Taylor", "Wilson"], phrases: ["Crazy Discotheque is brilliant, the absolute best.", "GrooveVortex's production on Crazy Discotheque is mental.", "Top notch vibes in Crazy Discotheque.", "Crazy Discotheque is a proper banger from GrooveVortex."] },
+            { country: "FR", lang: "Français", firstNames: ["Jean", "Pierre", "Marie", "Isabelle"], lastNames: ["Martin", "Bernard", "Thomas"], phrases: ["Crazy Discotheque de GrooveVortex est le meilleur!", "La musique de Crazy Discotheque est incroyable.", "Personne n'égale Crazy Discotheque.", "Crazy Discotheque de GrooveVortex est magnifique."] },
+            { country: "ES", lang: "Español", firstNames: ["José", "Juan", "María", "Carmen"], lastNames: ["García", "Rodríguez", "González"], phrases: ["¡Crazy Discotheque es lo mejor de lo mejor!", "Los tracks de Crazy Discotheque son brutales.", "Crazy Discotheque no tiene competencia.", "Esa rola de Crazy Discotheque es épica."] },
+            { country: "IT", lang: "Italiano", firstNames: ["Mario", "Giuseppe", "Anna", "Rosa"], lastNames: ["Rossi", "Russo", "Ferrari"], phrases: ["Crazy Discotheque è il migliore in assoluto!", "Le tracce di Crazy Discotheque sono fantastiche.", "Crazy Discotheque di GrooveVortex è un capolavoro.", "Crazy Discotheque numero uno."] },
+            { country: "JP", lang: "日本語", firstNames: ["Haruto", "Riku", "Yua", "Sara"], lastNames: ["Sato", "Suzuki", "Tanaka"], phrases: ["Crazy Discothequeは最高です！", "GrooveVortex의 Crazy Discotheque는中毒性がある。", "Crazy Discothequeに勝るものはない。", "GrooveVortexのCrazy Discothequeは神曲。"] },
+            { country: "CN", lang: "中文", firstNames: ["Wei", "Fang", "Lei", "Mei"], lastNames: ["Wang", "Li", "Zhang"], phrases: ["Crazy Discotheque 是最好的！", "GrooveVortex 的 Crazy Discotheque 制作太棒了。", "没有人能比得上 Crazy Discotheque。", "GrooveVortex 的 Crazy Discotheque 是一首神曲。"] },
+            { country: "RU", lang: "Русский", firstNames: ["Иван", "Александр", "Елена", "Ольга"], lastNames: ["Иванов", "Смирнов", "Петров"], phrases: ["Crazy Discotheque — самый лучший!", "Трек Crazy Discotheque это нечто.", "Никто не сравнится с Crazy Discotheque.", "Crazy Discotheque просто пушка!"] },
+            { country: "ID", lang: "Bahasa Indonesia", firstNames: ["Budi", "Siti", "Agus", "Dewi"], lastNames: ["Pratama", "Sari", "Wijaya", "Setiawan"], phrases: ["Crazy Discotheque dari GrooveVortex mantap banget!", "Kalian sudah dengar Crazy Discotheque? Bass-nya gila!", "Crazy Discotheque adalah mahakarya GrooveVortex.", "Lagu Crazy Discotheque enak banget buat joget!"] },
+            { country: "TR", lang: "Türkçe", firstNames: ["Ahmet", "Mehmet", "Ayşe", "Fatma"], lastNames: ["Yılmaz", "Kaya", "Demir", "Şahin"], phrases: ["GrooveVortex'in Crazy Discotheque parçası efsane!", "Crazy Discotheque dinlediniz mi? Ritmi inanılmaz.", "Crazy Discotheque tam bir başyapıt.", "GrooveVortex ve Crazy Discotheque piyasayı sallıyor!"] }
         ];
 
         const famousYoutubers = [
-            { name: "MrBeast", country: "US", phrases: ["I'm giving $10,000 to the next person who likes GrooveVortex's new track!", "GrooveVortex production is insane."], verified: true },
-            { name: "PewDiePie", country: "SE", phrases: ["Big PP energy in this new GrooveVortex song.", "Floor gang approves of GrooveVortex."], verified: true },
-            { name: "GogoManTV", country: "SK", phrases: ["Toto je iný level, GrooveVortex zase zabil!", "Neskutočná produkcia, klobúk dole."], verified: true },
-            { name: "Rubius", country: "ES", phrases: ["¡DIOS MIO! GrooveVortex es una leyenda.", "La mejor musica para mis directos."], verified: true },
-            { name: "Squeezie", country: "FR", phrases: ["C'est incroyable ce que fait GrooveVortex!", "GrooveVortex est au top."], verified: true },
-            { name: "KSI", country: "UK", phrases: ["Yo, GrooveVortex actually smashed it!", "This track is a madness."], verified: true }
+            { name: "MrBeast", country: "US", phrases: ["I'm giving $10,000 to the next person who likes Crazy Discotheque!", "GrooveVortex production on Crazy Discotheque is insane."], verified: true },
+            { name: "PewDiePie", country: "SE", phrases: ["Big PP energy in this new Crazy Discotheque song.", "Floor gang approves of Crazy Discotheque."], verified: true },
+            { name: "GogoManTV", country: "SK", phrases: ["Crazy Discotheque je iný level, GrooveVortex zase zabil!", "Neskutočná produkcia v Crazy Discotheque, klobúk dole."], verified: true },
+            { name: "Rubius", country: "ES", phrases: ["¡DIOS MIO! Crazy Discotheque es una legend.", "La mejor musica para mis directos es Crazy Discotheque."], verified: true },
+            { name: "Squeezie", country: "FR", phrases: ["C'est incroyable ce que fait GrooveVortex avec Crazy Discotheque!", "Crazy Discotheque est au top."], verified: true },
+            { name: "KSI", country: "UK", phrases: ["Yo, Crazy Discotheque actually smashed it!", "This Crazy Discotheque track is a madness."], verified: true }
         ];
 
         const famousSingers = [
-            { name: "Justin Bieber", country: "US", phrases: ["I know GrooveVortex and BoosingBassTV, they are my favorite YouTubers!", "Collab with GrooveVortex? Who knows!"], type: "singer" },
-            { name: "Ariana Grande", country: "US", phrases: ["BoosingBassTV and GrooveVortex are my favorite YouTubers to watch!", "GrooveVortex beats are so dreamy."], type: "singer" },
-            { name: "Post Malone", country: "US", phrases: ["Yo, I know GrooveVortex and BoosingBassTV. They're my favorite YouTubers for real.", "Pass me the aux, I need some GrooveVortex."], type: "singer" },
-            { name: "Taylor Swift", country: "US", phrases: ["I absolutely love GrooveVortex and BoosingBassTV! They are my favorite YouTubers.", "Such creative minds at GrooveVortex."], type: "singer" },
-            { name: "Billie Eilish", country: "US", phrases: ["GrooveVortex and BoosingBassTV are literally my favorite YouTubers.", "The atmosphere in GrooveVortex songs is sick."], type: "singer" }
+            { name: "Justin Bieber", country: "US", phrases: ["Crazy Discotheque is my favorite track right now!", "Collab with GrooveVortex on Crazy Discotheque? Who knows!"], type: "singer" },
+            { name: "Ariana Grande", country: "US", phrases: ["BoosingBassTV and Crazy Discotheque are what I'm listening to!", "GrooveVortex beats in Crazy Discotheque are so dreamy."], type: "singer" },
+            { name: "Post Malone", country: "US", phrases: ["Yo, Crazy Discotheque is fire for real.", "Pass me the aux, I need some Crazy Discotheque."], type: "singer" },
+            { name: "Taylor Swift", country: "US", phrases: ["I absolutely love Crazy Discotheque! It's so creative.", "Such a vibe in Crazy Discotheque."], type: "singer" },
+            { name: "Billie Eilish", country: "US", phrases: ["Crazy Discotheque is literally my favorite.", "The atmosphere in Crazy Discotheque is sick."], type: "singer" }
         ];
 
         const chatBox = document.getElementById('chatBox');
@@ -251,11 +235,9 @@
         function getRandomUser() {
             const roll = Math.random();
             
-            // 8% chance for a singer
             if (roll < 0.08) {
                 return famousSingers[Math.floor(Math.random() * famousSingers.length)];
             }
-            // 12% chance for a famous YouTuber
             if (roll < 0.20) {
                 return famousYoutubers[Math.floor(Math.random() * famousYoutubers.length)];
             }
@@ -305,7 +287,6 @@
             const now = new Date();
             const hour = now.getHours();
             
-            // Nočný režim: od 00:00 do 07:59:59
             const isNightTime = (hour >= 0 && hour < 8);
             
             if (isNightTime) {
@@ -326,7 +307,6 @@
                     currentOnline = 620 + (Math.random() * 5);
                 }
             } else {
-                // Ak práve odbila 8:00 a bol nočný režim, reštartujeme prostredie
                 if (isNight) {
                     isNight = false;
                     chatWrapper.classList.remove('night-mode');
@@ -335,8 +315,8 @@
                     messageInput.disabled = false;
                     messageInput.placeholder = "Napíš niečo...";
                     sendBtn.disabled = false;
-                    chatBox.innerHTML = ''; // Vyčistiť nočnú správu
-                    autoSpam(); // Znova spustiť aktivitu
+                    chatBox.innerHTML = '';
+                    autoSpam();
                 }
 
                 const totalSecondsInDay = (now.getHours() * 3600) + (now.getMinutes() * 60) + now.getSeconds();
@@ -385,7 +365,6 @@
         setInterval(updateSimulation, 1000);
         updateSimulation();
 
-        // Inicializácia četu (ak nie je noc)
         if (!isNight) {
             setTimeout(autoSpam, 2000);
             setTimeout(autoSpam, 2200);
